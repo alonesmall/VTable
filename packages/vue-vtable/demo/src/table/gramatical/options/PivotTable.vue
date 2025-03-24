@@ -1,44 +1,59 @@
 <template>
-  <vue-pivot-table :options="tableOptions" :records="data" @onMouseEnterCell="onMouseEnterCell" ref="pivotTableRef">
+  <div :style="{ height: '600px' }">
+    <Button @click="clickChangeFilterRules"> 修改filterRules </Button>
+    <vue-pivot-table
+      ref="pivotTableRef"
+      :options="tableOptions"
+      :records="data"
+      @on-mouse-enter-cell="onMouseEnterCell"
+    >
+      <PivotColumnDimension title="Category" dimensionKey="Category" :header-style="{ textStick: true }" width="auto" />
 
-    <PivotColumnDimension title="Category" dimensionKey="Category" :headerStyle="{ textStick: true }" width="auto" />
+      <PivotRowDimension
+        v-for="row in rows"
+        :key="row.dimensionKey"
+        :dimension-key="row.dimensionKey"
+        :title="row.title"
+        :header-style="row.headerStyle"
+        :width="row.width"
+      />
 
-    <PivotRowDimension
-      v-for="row in rows"
-      :key="row.dimensionKey"
-      :dimensionKey="row.dimensionKey"
-      :title="row.title"
-      :headerStyle="row.headerStyle"
-      :width="row.width"
-    />
+      <PivotIndicator
+        v-for="indicator in indicators"
+        :key="indicator.indicatorKey"
+        :indicator-key="indicator.indicatorKey"
+        :title="indicator.title"
+        :width="indicator.width"
+        :show-sort="indicator.showSort"
+        :header-style="indicator.headerStyle"
+        :format="indicator.format"
+        :style="indicator.style"
+      />
 
-    <PivotIndicator
-      v-for="indicator in indicators"
-      :key="indicator.indicatorKey"
-      :indicatorKey="indicator.indicatorKey"
-      :title="indicator.title"
-      :width="indicator.width"
-      :showSort="indicator.showSort"
-      :headerStyle="indicator.headerStyle"
-      :format="indicator.format"
-      :style="indicator.style"
-    />
+      <PivotCorner title-on-dimension="row" :headerStyle="{ textStick: true }" />
 
-    <PivotCorner titleOnDimension="row" :headerStyle="{ textStick: true }" />
+      <Menu menu-type="html" :contextMenuItems="['copy', 'paste', 'delete', '...']" />
 
-    <Menu menuType="html" :contextMenuItems="['copy', 'paste', 'delete', '...']" />
+      <!-- <PivotRowHeaderTitle title="City" :headerStyle="{ textStick: true }" /> -->
 
-    <!-- <PivotRowHeaderTitle title="City" :headerStyle="{ textStick: true }" /> -->
-    
-    <!-- <PivotColumnHeaderTitle title="Category" :headerStyle="{ textStick: true }" /> -->
-
-  </vue-pivot-table>
+      <!-- <PivotColumnHeaderTitle title="Category" :headerStyle="{ textStick: true }" /> -->
+    </vue-pivot-table>
+  </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
 import * as VTable from '@visactor/vtable';
-import { PivotColumnDimension, PivotRowDimension, PivotIndicator, PivotCorner, Menu , PivotRowHeaderTitle , PivotColumnHeaderTitle } from '../../../../../src/components/index';
+import {
+  PivotColumnDimension,
+  PivotRowDimension,
+  PivotIndicator,
+  PivotCorner,
+  Menu,
+  PivotRowHeaderTitle,
+  PivotColumnHeaderTitle
+} from '../../../../../src/components/index';
+import { Button } from '@arco-design/web-vue';
 
 const pivotTableRef = ref(null);
 
@@ -54,9 +69,17 @@ const tableOptions = {
   //   }
   // ],
   tooltip: {
-        isShowOverflowTextTooltip: true
+    isShowOverflowTextTooltip: true
   },
   dataConfig: {
+    filterRules: [
+      {
+        filterFunc: record => {
+          console.log(record);
+          return record.City !== 'Aberdeen';
+        }
+      }
+    ],
     sortRules: [
       {
         sortField: 'Category',
@@ -64,10 +87,24 @@ const tableOptions = {
       }
     ]
   },
-  widthMode: 'standard',
+  widthMode: 'standard'
 };
 
 const data = ref([]);
+
+const clickChangeFilterRules = () => {
+  const tableInstance = pivotTableRef.value.vTableInstance;
+  console.log('clickChangeFilterRules', tableInstance);
+  tableInstance.updateFilterRules([
+    {
+      filterFunc: record => {
+        console.log(record);
+        return record.City !== 'Abilene';
+        // return record.City !== 'Aberdeen';
+      }
+    }
+  ]);
+};
 
 const indicators = [
   {
@@ -81,7 +118,9 @@ const indicators = [
     style: {
       padding: [16, 28, 16, 28],
       color(args) {
-        if (args.dataValue >= 0) return 'black';
+        if (args.dataValue >= 0) {
+          return 'black';
+        }
         return 'red';
       }
     }
@@ -100,7 +139,9 @@ const indicators = [
     style: {
       padding: [16, 28, 16, 28],
       color(args) {
-        if (args.dataValue >= 0) return 'black';
+        if (args.dataValue >= 0) {
+          return 'black';
+        }
         return 'red';
       }
     }
@@ -119,7 +160,9 @@ const indicators = [
     style: {
       padding: [16, 28, 16, 28],
       color(args) {
-        if (args.dataValue >= 0) return 'black';
+        if (args.dataValue >= 0) {
+          return 'black';
+        }
         return 'red';
       }
     }
@@ -147,7 +190,7 @@ onMounted(() => {
   }, 0);
 });
 
-const onMouseEnterCell = (args) => {
+const onMouseEnterCell = args => {
   const tableInstance = pivotTableRef.value.vTableInstance;
   const { col, row, targetIcon } = args;
 
@@ -166,6 +209,6 @@ const onMouseEnterCell = (args) => {
         arrowMark: true
       }
     });
-  }  
+  }
 };
 </script>

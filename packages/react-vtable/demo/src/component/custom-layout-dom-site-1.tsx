@@ -77,7 +77,7 @@ const CommentReactComponent = (props: { name: string }) => {
           <Avatar>{name.slice(0, 1)}</Avatar>
         </Popover>
       }
-      content={<div>Comment body content.</div>}
+      content={<div>Comment body content111.</div>}
       datetime="1 hour"
       style={{ marginTop: 10, marginLeft: 10 }}
     />
@@ -186,9 +186,21 @@ function App() {
     });
   }
 
+  const arr = records?.map((item, index) => {
+    if (index === 0) {
+      return {
+        ...item,
+        id: index,
+        children: new Array(10).fill(['John', 18, 'male', '🏀', 'John', 'John', 'John'])
+      };
+    }
+    return item;
+  });
+  console.log('🚀 ~ arr ~ arr:', arr);
+
   return (
     <ListTable
-      records={records}
+      records={arr}
       height={500}
       width={1200}
       defaultRowHeight={110}

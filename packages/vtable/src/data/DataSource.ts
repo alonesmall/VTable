@@ -1083,6 +1083,7 @@ export class DataSource extends EventTarget implements DataSourceAPI {
 
     // Save the sorting states
     this.lastSortStates = states;
+    console.log('🚀 ~ sort ~ states:', states);
 
     // Get an array of sorting objects for each state
     let filedMapArray: Array<ISortedMapItem> = states.map(
@@ -1160,7 +1161,6 @@ export class DataSource extends EventTarget implements DataSourceAPI {
       const mapItem = filedMapArray[index] as ISortedMapItem;
       (mapItem as any)[state.order] = sortedIndexArray.slice(); // Save a copy of the array
     });
-
     this.updatePagerData();
     this.fireListeners(EVENT_TYPE.CHANGE_ORDER, null);
   }

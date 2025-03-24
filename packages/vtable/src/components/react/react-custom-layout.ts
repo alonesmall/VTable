@@ -166,6 +166,7 @@ export class ReactCustomLayout {
 }
 
 function getUpdateCustomCellRangeInListTable(componentId: string, table: BaseTableAPI, isHeaderCustomLayout?: boolean) {
+  console.log('33333333');
   const rowSeriesNumber = table.internalProps.rowSeriesNumber ? 1 : 0;
   if (isHeaderCustomLayout) {
     const layoutMap = table.internalProps.layoutMap as SimpleHeaderLayoutMap;

@@ -216,6 +216,10 @@ export function createTable() {
       format: (args: any) => {
         return '';
       },
+      // onDragEnd: (oldrow, newRow, x, y) => {
+      //   console.log('🚀 ~ createTable ~ oldrow:', oldrow);
+      //   console.log('🚀 ~ createTable ~ newRow:', newRow);
+      // },
       headerStyle: {
         color: 'black',
         bgColor: 'pink'
@@ -229,6 +233,10 @@ export function createTable() {
   const tableInstance = new VTable.ListTable(option);
   tableInstance.on('change_header_position', args => {
     console.log('change_header_position');
+
+    setTimeout(() => {
+      tableInstance.changeCellValue(2, 3, 'new value', true);
+    }, 1000);
   });
   window.tableInstance = tableInstance;
   bindDebugTool(tableInstance.scenegraph.stage, { customGrapicKeys: ['col', 'row'] });

@@ -5,7 +5,7 @@ import listtableFetch from './table/unified/options/list-table/list-table-fetch.
 
 import listTableEditor from './table/unified/composition/list-table/list-table-editor.vue';
 import listTableCustom from './table/unified/composition/list-table/list-table-custom.vue';
-import pivotTableTree from './table/unified/composition/pivot-table/pivot-table-lazyTreeload.vue';//need to fix
+import pivotTableTree from './table/unified/composition/pivot-table/pivot-table-lazyTreeload.vue'; //need to fix
 import pivotTableTitleOnDimension from './table/unified/options/pivot-table/pivot-table-titleOnDimension.vue';
 
 import pivotChart from './table/unified/composition/pivot-chart/pivot-chart.vue';
@@ -20,7 +20,7 @@ import ListTableCustom from './table/gramatical/composition/ListTable-custom.vue
 import ListTableCustomHover from './table/gramatical/composition/ListTable-custom-hover.vue';
 import ListTableVFor from './table/gramatical/options/ListTable-v-for.vue';
 
-import PivotTable from './table/gramatical/options/PivotTable.vue';  
+import PivotTable from './table/gramatical/options/PivotTable.vue';
 
 import PivotChartPie from './table/gramatical/composition/PivotChartPie.vue';
 
@@ -49,7 +49,7 @@ import singleRadio from './table/single/single-radio.vue';
   <!-- gramatical -->
   <!-- ---------- -->
 
-  <ListTable/>
+  <!-- <ListTable /> -->
   <!-- <ListTableEditor /> -->
   <!-- <ListTableEditorArco /> -->
   <!-- <ListTableDes /> -->
@@ -57,7 +57,7 @@ import singleRadio from './table/single/single-radio.vue';
   <!-- <ListTableCustom />  -->
   <!-- <ListTableCustomHover /> -->
 
-  <!-- <PivotTable /> -->
+  <PivotTable />
 
   <!-- <PivotChartPie /> -->
 
@@ -68,19 +68,18 @@ import singleRadio from './table/single/single-radio.vue';
   <!-- <singleTag /> -->
   <!-- <singleCheckbox /> -->
   <!-- <singleRadio /> -->
-
 </template>
 
 <style>
 body,
 #app {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  color: #2c3e50;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100vh;
 }
 </style>

@@ -234,6 +234,7 @@ export class CachedDataSource extends DataSource {
 
   getOriginRecordIndexForGroup(recordIndex: number | number[]) {
     const targetRecord = this.getOriginalRecord(recordIndex);
+    console.log('🚀 ~ CachedDataSource ~ getOriginRecordIndexForGroup ~ targetRecord:', targetRecord);
     if (!isValid(targetRecord)) {
       return undefined;
     }
@@ -413,6 +414,7 @@ export class CachedDataSource extends DataSource {
   }
 
   cacheBeforeChangedRecord(dataIndex: number | number[], table?: BaseTableAPI) {
+    console.log(dataIndex, 'dataindex');
     const originRecord = this.getOriginalRecord(dataIndex);
     if ((table.options as ListTableConstructorOptions).groupBy) {
       dataIndex = this.getOriginRecordIndexForGroup(dataIndex);

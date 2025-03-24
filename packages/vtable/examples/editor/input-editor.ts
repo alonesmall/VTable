@@ -7,106 +7,106 @@ const input_editor = new InputEditor({});
 VTable.register.editor('input', input_editor);
 export function createTable() {
   const personsDataSource = [
-    {
-      progress: 100,
-      id: 1,
-      name: 'a'
-    },
-    {
-      progress: 80.4,
-      id: 2,
-      name: 'b'
-    },
-    {
-      progress: 1,
-      id: 3,
-      name: 'c'
-    },
-    {
-      progress: 55,
-      id: 4,
-      name: 'd'
-    },
-    {
-      progress: 28,
-      id: 5,
-      name: 'e'
-    },
-    {
-      progress: 100,
-      id: 1,
-      name: 'a'
-    },
-    {
-      progress: 80.4,
-      id: 2,
-      name: 'b'
-    },
-    {
-      progress: 1,
-      id: 3,
-      name: 'c'
-    },
-    {
-      progress: 55,
-      id: 4,
-      name: 'd'
-    },
-    {
-      progress: 28,
-      id: 5,
-      name: 'e'
-    },
-    {
-      progress: 100,
-      id: 1,
-      name: 'a'
-    },
-    {
-      // progress: '',
-      // id: 2,
-      name: 'b'
-    },
-    {
-      progress: 1,
-      id: 3,
-      name: 'c'
-    },
-    {
-      progress: 55,
-      id: 4,
-      name: 'd'
-    },
-    {
-      progress: 28,
-      id: 5,
-      name: 'e'
-    },
-    {
-      progress: 100,
-      id: 1,
-      name: 'a'
-    },
-    {
-      progress: 80.4,
-      id: 2,
-      name: 'b'
-    },
-    {
-      progress: 1,
-      id: 3,
-      name: 'c'
-    },
-    {
-      progress: 55,
-      id: 4,
-      name: 'd'
-    },
-    {
-      progress: 28,
-      id: 5,
-      name: 'e'
-    },
+    // {
+    //   progress: 100,
+    //   id: 1,
+    //   name: 'a'
+    // },
+    // {
+    //   progress: 80.4,
+    //   id: 2,
+    //   name: 'b'
+    // },
+    // {
+    //   progress: 1,
+    //   id: 3,
+    //   name: 'c'
+    // },
+    // {
+    //   progress: 55,
+    //   id: 4,
+    //   name: 'd'
+    // },
+    // {
+    //   progress: 28,
+    //   id: 5,
+    //   name: 'e'
+    // },
+    // {
+    //   progress: 100,
+    //   id: 1,
+    //   name: 'a'
+    // },
+    // {
+    //   progress: 80.4,
+    //   id: 2,
+    //   name: 'b'
+    // },
+    // {
+    //   progress: 1,
+    //   id: 3,
+    //   name: 'c'
+    // },
+    // {
+    //   progress: 55,
+    //   id: 4,
+    //   name: 'd'
+    // },
+    // {
+    //   progress: 28,
+    //   id: 5,
+    //   name: 'e'
+    // },
+    // {
+    //   progress: 100,
+    //   id: 1,
+    //   name: 'a'
+    // },
+    // {
+    //   // progress: '',
+    //   // id: 2,
+    //   name: 'b'
+    // },
+    // {
+    //   progress: 1,
+    //   id: 3,
+    //   name: 'c'
+    // },
+    // {
+    //   progress: 55,
+    //   id: 4,
+    //   name: 'd'
+    // },
+    // {
+    //   progress: 28,
+    //   id: 5,
+    //   name: 'e'
+    // },
+    // {
+    //   progress: 100,
+    //   id: 1,
+    //   name: 'a'
+    // },
+    // {
+    //   progress: 80.4,
+    //   id: 2,
+    //   name: 'b'
+    // },
+    // {
+    //   progress: 1,
+    //   id: 3,
+    //   name: 'c'
+    // },
+    // {
+    //   progress: 55,
+    //   id: 4,
+    //   name: 'd'
+    // },
+    // {
+    //   progress: 28,
+    //   id: 5,
+    //   name: 'e'
+    // },
     {
       progress: 100,
       id: 1,
@@ -165,7 +165,8 @@ export function createTable() {
     autoFillWidth: true,
     allowFrozenColCount: 2,
     editor: 'input',
-    headerEditor: 'input'
+    headerEditor: 'input',
+    groupBy: ['id']
   };
 
   const instance = new ListTable(option);
@@ -177,7 +178,9 @@ export function createTable() {
   });
 
   instance.on('change_cell_value', arg => {
-    console.log(arg);
+    const recordIndex = instance.getRecordIndexByCell(arg.col, arg.row); // 获取当前单元格所在的记录索引
+    const record = instance.getRecordByCell(arg.col, arg.row); // 获取当前单元格的数据
+    instance.updateRecords([record], [recordIndex]);
   });
 
   // bindDebugTool(instance.scenegraph.stage as any, {

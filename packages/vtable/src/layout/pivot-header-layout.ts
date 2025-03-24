@@ -422,6 +422,7 @@ export class PivotHeaderLayoutMap implements LayoutMapAPI {
     this.setColumnWidths();
   }
   handleRowSeriesNumber(rowSeriesNumber: IRowSeriesNumber) {
+    console.log('3333');
     if (rowSeriesNumber) {
       if (Array.isArray(rowSeriesNumber)) {
         this.rowSeriesNumberColumn = rowSeriesNumber.map(seriesNumber => {

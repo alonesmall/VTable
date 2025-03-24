@@ -625,6 +625,15 @@ export class EventManager {
 
   dealColumnMover(eventArgsSet: SceneEvent) {
     const { eventArgs } = eventArgsSet;
+    const { y } = this.LastBodyPointerXY; // 获取鼠标在表格中的y坐标
+    const oldRowInfo = this.table.getRowAt(y);
+    const targetRow = eventArgs.row;
+    const { onDragEnd } = this.table.internalProps.rowSeriesNumber as any; // 假如新增的字段为 onDragEnd
+    onDragEnd?.(oldRowInfo.row, targetRow, eventArgsSet.abstractPos.x, eventArgsSet.abstractPos.y);
+
+    // console.log(this.table.internalProps.rowSeriesNumber, 'table.internalProps.rowSeriesNumber');
+    // console.log(oldRow, 'oldRow');
+    // console.log(eventArgs.row, 'newRow');
     if (isValid(eventArgs.col) && isValid(eventArgs.row)) {
       this.table.stateManager.updateMoveCol(
         eventArgs.col,

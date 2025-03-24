@@ -2,6 +2,9 @@ import * as VTable from '../../src';
 import { bindDebugTool } from '../../src/scenegraph/debug-tool';
 const ListTable = VTable.ListTable;
 const CONTAINER_ID = 'vTable';
+import { InputEditor } from '@visactor/vtable-editors';
+const input_editor = new InputEditor({});
+VTable.register.editor('input', input_editor);
 
 export function createTable() {
   const data = [

@@ -563,6 +563,7 @@ export function bindTableGroupListener(eventManager: EventManager) {
           }
         }
       } else if ((hitIcon.attribute as any).funcType === IconFuncTypeEnum.dragReorder) {
+        console.log('startMoveCol', eventArgsSet.eventArgs);
         stateManager.startMoveCol(
           eventArgsSet.eventArgs.col,
           eventArgsSet.eventArgs.row,

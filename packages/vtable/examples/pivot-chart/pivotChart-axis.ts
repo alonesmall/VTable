@@ -9378,8 +9378,10 @@ export function createTable() {
     //   disableHover: true
     // },
     // select: {
-    //   disableSelect: true
-    // }
+    //   // disableSelect: false,
+    //   // headerSelectMode: 'body'
+    //   // cornerHeaderSelectMode: 'body'
+    // },
     axes: [
       {
         orient: 'bottom',

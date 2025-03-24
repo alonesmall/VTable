@@ -392,8 +392,12 @@ export class ListTable extends BaseTable implements ListTableAPI {
    * 注：ListTable特有接口 */
   getRecordIndexByCell(col: number, row: number): number | number[] {
     const { layoutMap } = this.internalProps;
+    // console.log(this.dataSource.records, 'record');
     const recordShowIndex = layoutMap.getRecordShowIndexByCell(col, row);
-    return this.dataSource.getRecordIndexPaths(recordShowIndex);
+    // return recordShowIndex;
+    // console.log('🚀 ~ ListTable ~ getRecordIndexByCell ~ recordShowIndex:', recordShowIndex);
+    // // const index = this.dataSource.getRecordIndexPaths(recordShowIndex);
+    return this.dataSource.getRecordIndexPaths(recordShowIndex); //
   }
 
   getTableIndexByRecordIndex(recordIndex: number | number[]) {
@@ -1296,6 +1300,7 @@ export class ListTable extends BaseTable implements ListTableAPI {
    * @param workOnEditableCell 限制只能更改配置了编辑器的单元格值。快捷键paste这里配置的true，限制只能修改可编辑单元格值
    */
   changeCellValue(col: number, row: number, value: string | number | null, workOnEditableCell = false) {
+    console.log('changeCellValue111111', col, row, value);
     return listTableChangeCellValue(col, row, value, workOnEditableCell, this);
   }
   /**

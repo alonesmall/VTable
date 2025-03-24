@@ -326,6 +326,10 @@ export function createTable() {
             headerStyle: {}
           }
         ],
+        select: {
+          headerSelectMode: 'inline'
+          // cornerHeaderSelectMode: 'body'
+        },
         indicatorTitle: '指标',
         corner: {
           titleOnDimension: 'column',
