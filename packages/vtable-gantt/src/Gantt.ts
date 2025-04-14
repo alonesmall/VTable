@@ -1153,6 +1153,7 @@ export class Gantt extends EventTarget {
     this.scenegraph.updateNextFrame();
   }
   deleteLink(link: ITaskLink) {
+    console.log(this.parsedOptions, '2222');
     if (this.parsedOptions.dependencyLinkDeletable) {
       const index = this.parsedOptions.dependencyLinks.findIndex(
         item =>
